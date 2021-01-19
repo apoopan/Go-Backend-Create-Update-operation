@@ -2,18 +2,25 @@ package account
 
 import "context"
 
-//User is ...
-type User struct {
-	ID       string `json:"id"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
-	City     string `json:"city"`
-	Age      int    `json:"age"`
+type App struct {
+	id          string `json:"id"`
+	environment string `json:"environment"`
+	version     int    `json:"version"`
+	appname     string `json:"app-name"`
 }
 
 // Repository is ...
 type Repository interface {
-	CreateUser(ctx context.Context, user User) error
-	GetUser(ctx context.Context) (interface{}, error)
-	UpdateUser(ctx context.Context, user User) error
+	CreateApp(ctx context.Context, app App) error
+	//GetUser(ctx context.Context) (interface{}, error)
+	//UpdateUser(ctx context.Context, user User) error
 }
+
+/*
+{
+    "id" : "version-config",
+    "environment" : "dev",
+    "version" : "3.1.6",
+    "app-name" : "jiocinema"
+}
+*/

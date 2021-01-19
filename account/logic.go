@@ -21,27 +21,27 @@ func NewService(rep Repository, logger log.Logger) Service {
 	}
 }
 
-func (s service) CreateUser(ctx context.Context, email string, password string, city string, age int) (string, error) {
-	logger := log.With(s.logger, "method", "CreateUser")
+func (s service) CreateApp(ctx context.Context, environment string, version int, appname string) (string, error) {
+	logger := log.With(s.logger, "method", "CreateApp")
 
 	uuid, _ := uuid.NewV4()
 	id := uuid.String()
-	user := User{
-		ID:       id,
-		Email:    email,
-		Password: password,
-		City:     city,
-		Age:      age,
+	app := App{
+		id:          id,
+		environment: environment,
+		version:     version,
+		appname:     appname,
 	}
-	if err := s.repository.CreateUser(ctx, user); err != nil {
+	if err := s.repository.CreateApp(ctx, app); err != nil {
 		level.Error(logger).Log("err", err)
 		return "", err
 	}
 
-	logger.Log("Created user", id)
+	logger.Log("Created app", id)
 	return "SUCCESS", nil
 }
 
+/*
 func (s service) GetUser(ctx context.Context) (interface{}, error) {
 	logger := log.With(s.logger, "method", "GetUser")
 	var email interface{}
@@ -72,3 +72,4 @@ func (s service) UpdateUser(ctx context.Context, id string, email string, passwo
 	return "SUCCESS", nil
 
 }
+*/

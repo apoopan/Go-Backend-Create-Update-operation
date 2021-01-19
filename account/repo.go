@@ -7,7 +7,6 @@ import (
 
 	"github.com/go-kit/kit/log"
 	"gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"
 )
 
 //ErrRepo is ...
@@ -26,18 +25,19 @@ func NewRepo(db *mgo.Database, logger log.Logger) (Repository, error) {
 	}, nil
 }
 
-func (repo *repo) CreateUser(ctx context.Context, user User) error {
+func (repo *repo) CreateApp(ctx context.Context, app App) error {
 
-	err := repo.db.C("bloguser").Insert(user)
+	err := repo.db.C("configupdate").Insert(app)
 	if err != nil {
-		fmt.Println("Error occured inside CreateUser in repo")
+		fmt.Println("Error occured inside CreateApp in repo")
 		return err
 	}
-	fmt.Println("User Created:", user.Email, user.Password, user.City, user.Age)
+	fmt.Println("App Created:", app.environment, app.version, app.appname)
 
 	return nil
 }
 
+/*
 func (repo *repo) GetUser(ctx context.Context) (interface{}, error) {
 	coll := repo.db.C("bloguser")
 	data := []User{}
@@ -59,3 +59,4 @@ func (repo *repo) UpdateUser(ctx context.Context, user User) error {
 	}
 	return nil
 }
+*/
