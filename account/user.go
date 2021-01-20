@@ -3,17 +3,17 @@ package account
 import "context"
 
 type App struct {
-	id          string `json:"id"`
-	environment string `json:"environment"`
-	version     int    `json:"version"`
-	appname     string `json:"app-name"`
+	ID          string `json:"id"`
+	Environment string `json:"environment"`
+	Version     int    `json:"version"`
+	Appname     string `json:"app-name"`
 }
 
 // Repository is ...
 type Repository interface {
 	CreateApp(ctx context.Context, app App) error
-	//GetUser(ctx context.Context) (interface{}, error)
-	//UpdateUser(ctx context.Context, user User) error
+	GetApp(ctx context.Context) (interface{}, error)
+	UpdateApp(ctx context.Context, app App) error
 }
 
 /*
