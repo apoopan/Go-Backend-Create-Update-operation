@@ -18,29 +18,29 @@ type (
 		Ok string `json:"ok"`
 	}
 
-	/*
-		//GetUserRequest is...
-		GetUserRequest struct {
-		}
-		//GetUserResponse is ...
-		GetUserResponse struct {
-			Data interface{} `json:"user"`
-			Err  error       `json:"error,omitempty"`
-		}
+	//GetUserRequest is...
+	GetUserRequest struct {
+	}
+	//GetUserResponse is ...
+	GetUserResponse struct {
+		Data interface{} `json:"app"`
+		Err  error       `json:"error,omitempty"`
+	}
 
-		//UpdateUserRequest is ...
-		UpdateUserRequest struct {
-			ID       string `json:"id"`
-			Email    string `json:"email"`
-			Password string `json:"password"`
-			City     string `json:"city"`
-			Age      int    `json:"age"`
-		}
+/*
+	//UpdateUserRequest is ...
+	UpdateUserRequest struct {
+		ID       string `json:"id"`
+		Email    string `json:"email"`
+		Password string `json:"password"`
+		City     string `json:"city"`
+		Age      int    `json:"age"`
+	}
 
-		//UpdateUserResponse is...
-		UpdateUserResponse struct {
-			Ok string `json:"ok"`
-		}*/
+	//UpdateUserResponse is...
+	UpdateUserResponse struct {
+		Ok string `json:"ok"`
+	}*/
 )
 
 func encodeResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
@@ -71,9 +71,10 @@ func decodeUpdateUserReq(ctx context.Context, r *http.Request) (interface{}, err
 	}
 	return req, nil
 }
+*/
 
 func decodeGetUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	var req GetUserRequest
 
 	return req, nil
-} */
+}

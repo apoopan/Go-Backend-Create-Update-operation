@@ -12,7 +12,7 @@ type App struct {
 // Repository is ...
 type Repository interface {
 	CreateApp(ctx context.Context, app App) error
-	//GetUser(ctx context.Context) (interface{}, error)
+	GetUser(ctx context.Context) (interface{}, error)
 	//UpdateUser(ctx context.Context, user User) error
 }
 

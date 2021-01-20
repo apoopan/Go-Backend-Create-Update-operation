@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-kit/kit/log"
 	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 //ErrRepo is ...
@@ -37,18 +38,19 @@ func (repo *repo) CreateApp(ctx context.Context, app App) error {
 	return nil
 }
 
-/*
 func (repo *repo) GetUser(ctx context.Context) (interface{}, error) {
-	coll := repo.db.C("bloguser")
-	data := []User{}
+	coll := repo.db.C("configupdate")
+	data := []App{}
 	err := coll.Find(bson.M{}).All(&data)
 	if err != nil {
-		fmt.Println("Error occured inside GetCUstomerById in repo")
+		fmt.Println("Error occured inside GetCustomerById in repo")
 		return "", err
 	}
+	fmt.Println(data)
 	return data, nil
 }
 
+/*
 func (repo *repo) UpdateUser(ctx context.Context, user User) error {
 	f := bson.M{"id": user.ID}
 	change := bson.M{"$set": bson.M{"password": user.Password, "email": user.Email, "city": user.City, "age": user.Age}}

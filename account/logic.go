@@ -2,6 +2,7 @@ package account
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/log/level"
@@ -41,18 +42,19 @@ func (s service) CreateApp(ctx context.Context, environment string, version int,
 	return "SUCCESS", nil
 }
 
-/*
 func (s service) GetUser(ctx context.Context) (interface{}, error) {
 	logger := log.With(s.logger, "method", "GetUser")
-	var email interface{}
-	email, err := s.repository.GetUser(ctx)
+	var appname interface{}
+	appname, err := s.repository.GetUser(ctx)
 	if err != nil {
 		level.Error(logger).Log("err", err)
 		return "", err
 	}
-	return email, nil
+	fmt.Println(appname)
+	return appname, nil
 }
 
+/*
 func (s service) UpdateUser(ctx context.Context, id string, email string, password string, city string, age int) (string, error) {
 	logger := log.With(s.logger, "method", "UpdateUser")
 

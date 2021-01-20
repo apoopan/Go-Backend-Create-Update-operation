@@ -2,6 +2,7 @@ package account
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-kit/kit/endpoint"
 )
@@ -9,7 +10,7 @@ import (
 //Endpoints is...
 type Endpoints struct {
 	CreateApp endpoint.Endpoint
-	//GetUser    endpoint.Endpoint
+	GetUser   endpoint.Endpoint
 	//UpdateUser endpoint.Endpoint
 }
 
@@ -17,7 +18,7 @@ type Endpoints struct {
 func MakeEndpoints(s Service) Endpoints {
 	return Endpoints{
 		CreateApp: makeCreateAppEndpoint(s),
-		//GetUser:    makeGetUserEndpoint(s),
+		GetUser:   makeGetUserEndpoint(s),
 		//UpdateUser: makeUpdateUserEndpoint(s),
 	}
 }
@@ -30,7 +31,6 @@ func makeCreateAppEndpoint(s Service) endpoint.Endpoint {
 	}
 }
 
-/*
 func makeGetUserEndpoint(s Service) endpoint.Endpoint {
 	fmt.Println("into makeendpoint")
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
@@ -41,6 +41,7 @@ func makeGetUserEndpoint(s Service) endpoint.Endpoint {
 
 }
 
+/*
 func makeUpdateUserEndpoint(s Service) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(UpdateUserRequest)
