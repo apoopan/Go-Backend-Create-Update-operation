@@ -8,39 +8,36 @@ import (
 )
 
 type (
-	//CreateUserRequest is ...
-	CreateUserRequest struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
-		City     string `json:"city"`
-		Age      int    `json:"age"`
+	CreateAppRequest struct {
+		ID          string `json:"id"`
+		Environment string `json:"environment"`
+		Version     int    `json:"version"`
+		Appname     string `json:"app-name"`
 	}
 
-	//CreateUserResponse is ...
-	CreateUserResponse struct {
+	CreateAppResponse struct {
 		Ok string `json:"ok"`
 	}
 
 	//GetUserRequest is...
-	GetUserRequest struct {
+	GetAppRequest struct {
 	}
 	//GetUserResponse is ...
-	GetUserResponse struct {
-		Data interface{} `json:"user"`
+	GetAppResponse struct {
+		Data interface{} `json:"app"`
 		Err  error       `json:"error,omitempty"`
 	}
 
 	//UpdateUserRequest is ...
-	UpdateUserRequest struct {
-		ID       string `json:"id"`
-		Email    string `json:"email"`
-		Password string `json:"password"`
-		City     string `json:"city"`
-		Age      int    `json:"age"`
+	UpdateAppRequest struct {
+		ID          string `json:"id"`
+		Environment string `json:"environment"`
+		Version     int    `json:"version"`
+		Appname     string `json:"app-name"`
 	}
 
 	//UpdateUserResponse is...
-	UpdateUserResponse struct {
+	UpdateAppResponse struct {
 		Ok string `json:"ok"`
 	}
 )
@@ -50,8 +47,8 @@ func encodeResponse(_ context.Context, w http.ResponseWriter, response interface
 	return json.NewEncoder(w).Encode(response)
 }
 
-func decodeUserReq(ctx context.Context, r *http.Request) (interface{}, error) {
-	var req CreateUserRequest
+func decodeAppReq(ctx context.Context, r *http.Request) (interface{}, error) {
+	var req CreateAppRequest
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		return nil, err
@@ -64,8 +61,8 @@ func encodeUpdateResponse(_ context.Context, w http.ResponseWriter, response int
 	return json.NewEncoder(w).Encode(response)
 }
 
-func decodeUpdateUserReq(ctx context.Context, r *http.Request) (interface{}, error) {
-	var req UpdateUserRequest
+func decodeUpdateReq(ctx context.Context, r *http.Request) (interface{}, error) {
+	var req UpdateAppRequest
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		return nil, err
@@ -73,8 +70,8 @@ func decodeUpdateUserReq(ctx context.Context, r *http.Request) (interface{}, err
 	return req, nil
 }
 
-func decodeGetUserRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var req GetUserRequest
+func decodeGetAppRequest(_ context.Context, r *http.Request) (interface{}, error) {
+	var req GetAppRequest
 
 	return req, nil
 }

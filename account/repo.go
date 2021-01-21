@@ -26,33 +26,33 @@ func NewRepo(db *mgo.Database, logger log.Logger) (Repository, error) {
 	}, nil
 }
 
-func (repo *repo) CreateUser(ctx context.Context, user User) error {
+func (repo *repo) CreateApp(ctx context.Context, app App) error {
 
-	err := repo.db.C("bloguser").Insert(user)
+	err := repo.db.C("configupdate").Insert(app)
 	if err != nil {
-		fmt.Println("Error occured inside CreateUser in repo")
+		fmt.Println("Error occured inside CreateApp in repo")
 		return err
 	}
-	fmt.Println("User Created:", user.Email, user.Password, user.City, user.Age)
+	fmt.Println("App Created:", app.ID, app.Environment, app.Version, app.Appname)
 
 	return nil
 }
 
-func (repo *repo) GetUser(ctx context.Context) (interface{}, error) {
-	coll := repo.db.C("bloguser")
-	data := []User{}
+func (repo *repo) GetApp(ctx context.Context) (interface{}, error) {
+	coll := repo.db.C("configupdate")
+	data := []App{}
 	err := coll.Find(bson.M{}).All(&data)
 	if err != nil {
-		fmt.Println("Error occured inside GetCUstomerById in repo")
+		fmt.Println("Error occured inside GetAppById in repo")
 		return "", err
 	}
 	return data, nil
 }
 
-func (repo *repo) UpdateUser(ctx context.Context, user User) error {
-	f := bson.M{"id": user.ID}
-	change := bson.M{"$set": bson.M{"password": user.Password, "email": user.Email, "city": user.City, "age": user.Age}}
-	err := repo.db.C("bloguser").Update(f, change)
+func (repo *repo) UpdateApp(ctx context.Context, app App) error {
+	f := bson.M{"id": app.ID}
+	change := bson.M{"$set": bson.M{"environment": app.Environment, "version": app.Version, "appname": app.Appname}}
+	err := repo.db.C("configupdate").Update(f, change)
 
 	if err != nil {
 		return err
