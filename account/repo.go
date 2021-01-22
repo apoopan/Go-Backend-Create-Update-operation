@@ -51,11 +51,21 @@ func (repo *repo) GetApp(ctx context.Context) (interface{}, error) {
 
 func (repo *repo) UpdateApp(ctx context.Context, app App) error {
 	f := bson.M{"id": app.ID}
-	change := bson.M{"$set": bson.M{"environment": app.Environment, "version": app.Version, "appname": app.Appname}}
-	err := repo.db.C("configupdate").Update(f, change)
+	data := []App{}
+	a := repo.db.C("configupdate").Find(bson.M{"id": app.ID}).One(&data)
+	if a != nil {
+		change := bson.M{"$set": bson.M{"environment": app.Environment, "version": app.Version, "appname": app.Appname}}
+		err := repo.db.C("configupdate").Update(f, change)
+		if err != nil {
+			return err
 
-	if err != nil {
-		return err
+		}
+	} else {
+		err := repo.db.C("configupdate").Insert(app)
+		if err != nil {
+			return err
+		}
 	}
+
 	return nil
 }
